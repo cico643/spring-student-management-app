@@ -1,6 +1,6 @@
 package com.cico643.studentmanagement.dto;
 
-import com.cico643.studentmanagement.model.Role;
+import com.cico643.studentmanagement.model.enumTypes.Role;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.*;

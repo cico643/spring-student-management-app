@@ -1,4 +1,4 @@
-package com.cico643.studentmanagement.model;
+package com.cico643.studentmanagement.model.enumTypes;
 
 public enum Role {
     STUDENT,
