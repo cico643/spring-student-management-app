@@ -20,18 +20,18 @@ public class ApiError {
     private Map<String, Object> data = Collections.emptyMap();
 
     @JsonCreator
-    ApiError(HttpStatus status) {
+    public ApiError(HttpStatus status) {
         this.status = status;
         this.message = "Unexpected error";
     }
 
     @JsonCreator
-    ApiError(HttpStatus status, String message) {
+    public ApiError(HttpStatus status, String message) {
         this.status = status;
         this.message = message;
     }
     @JsonCreator
-    ApiError(HttpStatus status, String message, Map<String, Object> data) {
+    public ApiError(HttpStatus status, String message, Map<String, Object> data) {
         this.status = status;
         this.message = message;
         this.data = data;
