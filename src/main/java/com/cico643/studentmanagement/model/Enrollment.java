@@ -1,5 +1,6 @@
 package com.cico643.studentmanagement.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
@@ -27,10 +28,12 @@ public class Enrollment {
 
     @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.DETACH}, fetch = FetchType.LAZY)
     @JoinColumn(name = "student_id")
+    @JsonIgnore
     private User student;
 
     @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.DETACH}, fetch = FetchType.LAZY)
     @JoinColumn(name = "class_id")
+    @JsonIgnore
     private Class _class;
 
     @OneToMany(mappedBy = "enrollment")

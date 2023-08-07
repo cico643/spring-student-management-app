@@ -1,5 +1,6 @@
 package com.cico643.studentmanagement.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
@@ -48,6 +49,7 @@ public class Assignment {
 
     @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH},fetch = FetchType.LAZY)
     @JoinColumn(name = "class_id")
+    @JsonIgnore
     private Class _class;
 
     @OneToMany(mappedBy = "assignment")

@@ -1,6 +1,7 @@
 package com.cico643.studentmanagement.model;
 
 import com.cico643.studentmanagement.model.enumTypes.TokenType;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -29,5 +30,6 @@ public class Token {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
+    @JsonIgnore
     public User user;
 }
