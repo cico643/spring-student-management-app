@@ -12,9 +12,9 @@ import java.util.Map;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class GenericApiResponse {
+public class GenericApiResponse<T> {
     private boolean success;
     private HttpStatus status;
     private String message;
-    private Map<Object, Object> data;
+    private T data;
 }
