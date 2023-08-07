@@ -83,8 +83,7 @@ public class AuthService {
         refreshToken = authHeader.substring(7);
         userEmail = jwtService.extractUsername(refreshToken);
         if(userEmail != null) {
-            var user = this.userRepository.findByEmail(userEmail)
-                    .orElseThrow(() -> new UserNotFoundException("User could not find by email: " + userEmail));
+            var user = this.getUserByEmail(userEmail);
             if(jwtService.isTokenValid(refreshToken, user)) {
                 var accessToken = jwtService.generateToken(user);
                 revokeAllUserTokens(user);
@@ -97,6 +96,10 @@ public class AuthService {
                 new ObjectMapper().writeValue(response.getOutputStream(), authResponse);
             }
         }
+    }
+
+    public User getUserByEmail(String email) {
+        return this.userRepository.findByEmail(email).orElseThrow(() -> new UserNotFoundException("User could not find by email: " + email));
     }
 
     private void saveUserToken(User user, String jwtToken) {
