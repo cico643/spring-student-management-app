@@ -49,7 +49,7 @@ public class ClassService {
 
     public GenericApiResponse<Class> getClassById(Integer id, HttpServletResponse response) throws IOException {
         var _class = this.classRepository.findById(id)
-                        .orElseThrow(() -> new KlassNotFoundException("Class could not find by id: [" + id + "]"));
+                        .orElseThrow(() -> new KlassNotFoundException("Class could not find by given id: [" + id + "]"));
         log.info("Fetched class by id: [" + id + "]");
 
         var principal = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -59,6 +59,7 @@ public class ClassService {
                 response.setStatus(HttpStatus.FORBIDDEN.value());
                 ApiError errorMessage = new ApiError(HttpStatus.FORBIDDEN, "Access Denied");
                 new ObjectMapper().writeValue(response.getOutputStream(), errorMessage);
+                return new GenericApiResponse();
             }
         }
 
@@ -70,5 +71,31 @@ public class ClassService {
                 .data(_class)
                 .build();
 
+    }
+
+    public GenericApiResponse deleteClassById(int id, HttpServletResponse response) throws IOException {
+        var _class = this.classRepository.findById(id)
+                .orElseThrow(() -> new KlassNotFoundException("Class could not find by given id: [" + id + "]"));
+
+        var principal = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        var user = this.authService.getUserByEmail(principal.getUsername());
+        if(user.getRole() != Role.ADMIN) {
+            if(!_class.getInstructor().getId().equals(user.getId())) {
+                response.setStatus(HttpStatus.FORBIDDEN.value());
+                ApiError errorMessage = new ApiError(HttpStatus.FORBIDDEN,
+                        "Class can only be deleted by an authorized user");
+                new ObjectMapper().writeValue(response.getOutputStream(), errorMessage);
+                return new GenericApiResponse();
+            }
+        }
+
+        this.classRepository.deleteById(id);
+        log.info("Deleted class by id: [" + id + "]");
+        return GenericApiResponse
+                .builder()
+                .success(true)
+                .status(HttpStatus.OK)
+                .message("Deleted class by id: [" + id + "]")
+                .build();
     }
 }

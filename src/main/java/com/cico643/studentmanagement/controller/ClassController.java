@@ -29,5 +29,10 @@ public class ClassController {
         return new ResponseEntity<>(classService.getClassById(id, response), HttpStatus.OK);
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<GenericApiResponse> deleteClassById(@PathVariable int id, HttpServletResponse response) throws IOException {
+        return new ResponseEntity<>(classService.deleteClassById(id, response), HttpStatus.OK);
+    }
+
 
 }
