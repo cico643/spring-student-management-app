@@ -30,14 +30,15 @@ public class GeneralExceptionHandler extends ResponseEntityExceptionHandler {
                                                                   @NotNull HttpHeaders headers,
                                                                   @NotNull HttpStatusCode status,
                                                                   @NotNull WebRequest request) {
-        Map<String, String> errors = new HashMap<>();
+        Map<String, Object> errors = new HashMap<>();
         ex.getBindingResult().getAllErrors().forEach(error ->{
             String fieldName = ((FieldError) error).getField();
-            String errorMessage = error.getDefaultMessage();
+            Object errorMessage = error.getDefaultMessage();
             errors.put(fieldName, errorMessage);
         });
+        ApiError errorMessage = new ApiError(HttpStatus.BAD_REQUEST, ex.getMessage(), errors);
 
-        return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(errorMessage, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(UserNotFoundException.class)
