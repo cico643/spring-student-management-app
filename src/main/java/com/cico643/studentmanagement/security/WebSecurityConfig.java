@@ -17,8 +17,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.security.web.authentication.logout.LogoutHandler;
 
 import static com.cico643.studentmanagement.model.enumTypes.Permission.*;
-import static com.cico643.studentmanagement.model.enumTypes.Role.ADMIN;
-import static com.cico643.studentmanagement.model.enumTypes.Role.INSTRUCTOR;
+import static com.cico643.studentmanagement.model.enumTypes.Role.*;
 import static org.springframework.http.HttpMethod.*;
 
 @Configuration
@@ -48,6 +47,10 @@ public class WebSecurityConfig {
                         .requestMatchers(POST, "/api/v1/class/**").hasAnyAuthority(ADMIN_CREATE.name(), INSTRUCTOR_CREATE.name())
                         .requestMatchers(PUT, "/api/v1/class/**").hasAnyAuthority(ADMIN_UPDATE.name(), INSTRUCTOR_UPDATE.name())
                         .requestMatchers(DELETE, "/api/v1/class/**").hasAnyAuthority(ADMIN_DELETE.name(), INSTRUCTOR_DELETE.name())
+
+                        .requestMatchers("/api/v1/enrollment/**").hasAnyRole(ADMIN.name(), INSTRUCTOR.name(), STUDENT.name())
+                        .requestMatchers(POST, "/api/v1/enrollment/**").hasAnyAuthority(ADMIN_CREATE.name(), STUDENT_CREATE.name())
+
 
                         .anyRequest().authenticated())
                 .exceptionHandling(exceptionHandlingConfigurer ->

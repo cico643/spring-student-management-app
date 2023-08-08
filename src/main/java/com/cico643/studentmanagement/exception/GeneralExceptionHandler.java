@@ -48,7 +48,13 @@ public class GeneralExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler(KlassNotFoundException.class)
-    public ResponseEntity<?> classNotFoundExceptionHandler(UserNotFoundException exception) throws JsonProcessingException {
+    public ResponseEntity<?> classNotFoundExceptionHandler(KlassNotFoundException exception) throws JsonProcessingException {
+        ApiError errorMessage = new ApiError(HttpStatus.NOT_FOUND, exception.getMessage());
+        return new ResponseEntity<>(mapper.writeValueAsString(errorMessage), HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(EnrollmentNotFoundException.class)
+    public ResponseEntity<?> enrollmentNotFoundExceptionHandler(EnrollmentNotFoundException exception) throws JsonProcessingException {
         ApiError errorMessage = new ApiError(HttpStatus.NOT_FOUND, exception.getMessage());
         return new ResponseEntity<>(mapper.writeValueAsString(errorMessage), HttpStatus.NOT_FOUND);
     }

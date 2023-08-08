@@ -109,6 +109,10 @@ public class AuthService {
         return this.userRepository.findByEmail(email).orElseThrow(() -> new UserNotFoundException("User could not find by email: " + email));
     }
 
+    protected User getUserById(String id) {
+        return this.userRepository.findById(id).orElseThrow(() -> new UserNotFoundException("User could not find by id: " + id));
+    }
+
     private void saveUserToken(User user, String jwtToken) {
         var token = Token.builder()
                 .user(user)
