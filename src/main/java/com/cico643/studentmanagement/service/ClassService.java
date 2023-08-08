@@ -5,6 +5,7 @@ import com.cico643.studentmanagement.dto.GenericApiResponse;
 import com.cico643.studentmanagement.exception.ApiError;
 import com.cico643.studentmanagement.exception.KlassNotFoundException;
 import com.cico643.studentmanagement.model.Class;
+import com.cico643.studentmanagement.model.Enrollment;
 import com.cico643.studentmanagement.model.enumTypes.Role;
 import com.cico643.studentmanagement.repository.ClassRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -18,6 +19,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -106,6 +108,17 @@ public class ClassService {
         }
 
         return result;
+    }
+
+    public GenericApiResponse<List<Enrollment>> getAllEnrollmentsForGivenClass(int id) {
+        var _class = findClassById(id);
+        return GenericApiResponse
+                .<List<Enrollment>>builder()
+                .success(true)
+                .status(HttpStatus.OK)
+                .message("Fetched all enrollments of given class id: [" + id + "]")
+                .data(_class.getEnrollments())
+                .build();
     }
 
     protected Class findClassById(int id) throws KlassNotFoundException {

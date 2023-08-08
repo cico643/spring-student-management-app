@@ -3,6 +3,7 @@ package com.cico643.studentmanagement.controller;
 import com.cico643.studentmanagement.dto.CreateClassRequest;
 import com.cico643.studentmanagement.dto.GenericApiResponse;
 import com.cico643.studentmanagement.model.Class;
+import com.cico643.studentmanagement.model.Enrollment;
 import com.cico643.studentmanagement.service.ClassService;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
@@ -12,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/class")
@@ -34,5 +36,9 @@ public class ClassController {
         return new ResponseEntity<>(classService.deleteClassById(id, response), HttpStatus.OK);
     }
 
+    @GetMapping("/{id}/enrollment")
+    public ResponseEntity<GenericApiResponse<List<Enrollment>>> getEnrollmentsForGivenClass(@PathVariable int id) {
+        return new ResponseEntity<>(classService.getAllEnrollmentsForGivenClass(id), HttpStatus.OK);
+    }
 
 }
