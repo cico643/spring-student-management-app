@@ -27,7 +27,7 @@ public class EnrollmentController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<GenericApiResponse<Enrollment>> getClassById(@PathVariable int id) {
+    public ResponseEntity<GenericApiResponse<Enrollment>> getEnrollmentById(@PathVariable int id) {
         return new ResponseEntity<>(enrollmentService.getEnrollmentById(id), HttpStatus.OK);
     }
 
