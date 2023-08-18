@@ -1,0 +1,19 @@
+{
+  "id": 1,
+  "title": "Test Assignment - 1",
+  "description": "Test Description",
+  "createdAt": "2023-08-14T15:22:31.474242Z",
+  "endDate": "2023-08-16T06:30:00.000000Z",
+  "_class": {
+    "id": 1,
+    "title": "Test Sınıfı - 1",
+    "instructor": {
+      "id": "6f3c538a-a608-4a7c-a294-ac06925b5f3b",
+      "firstName": "Cihat",
+      "lastName": "Yeşildağ",
+      "email": "inst@test.com",
+      "password": "password",
+      "role": "INSTRUCTOR"
+    }
+  }
+}

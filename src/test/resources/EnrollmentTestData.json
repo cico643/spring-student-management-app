@@ -1,0 +1,24 @@
+{
+  "id": 1,
+  "grade": 0,
+  "student": {
+    "id": "a55b8f98-49da-4230-aae6-be06d5b3b757",
+    "firstName": "Cihat",
+    "lastName": "Yeşildağ",
+    "email": "student@test.com",
+    "password": "password",
+    "role": "STUDENT"
+  },
+  "_class": {
+    "id": 1,
+    "title": "Test Sınıfı - 1",
+    "instructor": {
+      "id": "6f3c538a-a608-4a7c-a294-ac06925b5f3b",
+      "firstName": "Cihat",
+      "lastName": "Yeşildağ",
+      "email": "inst@test.com",
+      "password": "password",
+      "role": "INSTRUCTOR"
+    }
+  }
+}
