@@ -15,6 +15,7 @@
 ## Technologies
 * Spring Boot 3.0
 * Spring Security
+* Docker Compose
 * PostgreSQL
 * Hibernate and Spring Data JPA
 * JSON Web Tokens (JWT)
