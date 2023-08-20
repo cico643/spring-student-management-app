@@ -38,14 +38,14 @@ public class ClassService {
                 .title(request.getTitle())
                 .instructor(user)
                 .build();
-        this.classRepository.save(_class);
-        log.info("A class created by instructor id: [" + _class.getInstructor().getId() + "]");
+        var savedClass = this.classRepository.save(_class);
+        log.info("A class created by instructor id: [" + savedClass.getInstructor().getId() + "]");
         return GenericApiResponse
                 .builder()
                 .success(true)
                 .status(HttpStatus.CREATED)
-                .message("The class named: [" + _class.getTitle() +"] has been successfully created.")
-                .data(Map.of("id", _class.getId(), "title", _class.getTitle()))
+                .message("The class named: [" + savedClass.getTitle() +"] has been successfully created.")
+                .data(Map.of("id", savedClass.getId(), "title", savedClass.getTitle()))
                 .build();
     }
 
